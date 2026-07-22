@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Academic Paper Abstract Classifier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <main class="wrap">
+    <h1>Academic Paper Abstract Classifier</h1>
+    <p class="subtitle">Enter a DOI to fetch and classify a paper's abstract into a research area.</p>
+
+    <form id="classify-form">
+      <label for="doi">DOI</label>
+      <input type="text" id="doi" name="doi" placeholder="e.g. 10.1109/TPAMI.2020.2992393" />
+
+      <button type="button" id="toggle-manual" class="link-btn">Paste abstract manually instead</button>
+
+      <div id="manual-block" class="hidden">
+        <label for="abstract">Abstract text</label>
+        <textarea id="abstract" name="abstract" rows="6" placeholder="Paste the abstract text here..."></textarea>
+      </div>
+
+      <button type="submit" id="submit-btn">Classify</button>
+    </form>
+
+    <div id="status" class="hidden"></div>
+
+    <section id="result" class="hidden">
+      <h2 id="result-title"></h2>
+      <p id="result-doi" class="muted"></p>
+
+      <div class="predicted">
+        <span class="predicted-label" id="predicted-label"></span>
+        <span class="predicted-confidence" id="predicted-confidence"></span>
+      </div>
+
+      <h3>Class probabilities</h3>
+      <div id="prob-bars"></div>
+
+      <h3>Top keywords (TF-IDF)</h3>
+      <div id="keywords"></div>
+
+      <details>
+        <summary>Abstract used</summary>
+        <p id="abstract-used"></p>
+      </details>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
